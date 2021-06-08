@@ -10,15 +10,15 @@ public interface TicketRepository extends MongoRepository<Ticket, String> {
 
     Page<Ticket> findByUserIdOrderByDate(Pageable pages, String userId);
 
-    Page<Ticket> findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingOrderByDateDateAsc(
+    Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityOrderByDateDateAsc(
             String title, Status status, String priority, Pageable pageable
     );
 
-    Page<Ticket> findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingAndUserIdOrderByDateDateAsc(
+    Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityAndUserIdOrderByDateDateAsc(
             String title, Status status, String priority, Pageable pageable
     );
 
-    Page<Ticket> findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingAndAssignedUserIdOrderByDateDateAsc(
+    Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityAndAssignedUserIdOrderByDateDateAsc(
             String title, Status status, String priority, Pageable pageable
     );
 
