@@ -11,7 +11,6 @@ public enum Status {
 
     public static Status getStatus(String status) {
         return switch (status) {
-            case "new" -> NEW;
             case "Resolved" -> RESOLVED;
             case "Approved" -> APPROVED;
             case "Disapproved" -> DISAPPROVED;

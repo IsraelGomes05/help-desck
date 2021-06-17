@@ -1,7 +1,8 @@
-package br.com.devisrael.helpdesk.service;
+package br.com.devisrael.helpdesk.controller;
 
 import br.com.devisrael.helpdesk.api.entity.Response;
 import br.com.devisrael.helpdesk.api.entity.User;
+import br.com.devisrael.helpdesk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response<User>> create(HttpServletRequest request, @RequestBody User user,
                                                  BindingResult bindingResult) {
         var response = new Response<User>();
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response<User>> update(HttpServletRequest request, @RequestBody User user,
                                                  BindingResult bindingResult) {
         var response = new Response<User>();
@@ -82,7 +83,7 @@ public class UserController {
     }
 
     @GetMapping(value = {"{id}"})
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response<User>> findById(@PathVariable("id") String id) {
         var response = new Response<User>();
         try {
@@ -95,7 +96,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = {"{id}"})
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response<String>> delete(@PathVariable("id") String id) {
         var response = new Response<String>();
         try {
@@ -107,8 +108,8 @@ public class UserController {
         return ResponseEntity.ok(new Response<String>());
     }
 
-    @GetMapping(value = "{page/count}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping(value = "{page}/{count}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Response<Page<User>>> findAll(@PathVariable int page, @PathVariable int count) {
         var pageResponse = new Response<Page<User>>();
         var all = userService.findAll(page, count);
